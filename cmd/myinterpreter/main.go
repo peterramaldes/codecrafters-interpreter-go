@@ -83,7 +83,7 @@ func main() {
 			lx := strings.TrimSpace(string(c))
 
 			// Parse literal
-			l := "NULL"
+			l := "null"
 
 			val := Tokenize{
 				tokenType: tt,
