@@ -66,9 +66,15 @@ func main() {
 
 	var tokens []Tokenize
 	if len(content) > 0 {
+
 		// Meaning we have data on the file to read into it
 		for i := 0; i < len(content); i++ {
 			c := content[i]
+
+			if c == '\n' {
+				// Skip breakline
+				break
+			}
 
 			// Parse token type
 			var tt TokenType
@@ -91,10 +97,21 @@ func main() {
 				literal:   l,
 			}
 
-			fmt.Printf("%v\n", val)
 			tokens = append(tokens, val)
 		}
+
+		// Add `EOF null` as we finish the file
+		eof := Tokenize{
+			tokenType: EOF,
+			lexeme:    "",
+			literal:   "null",
+		}
+		tokens = append(tokens, eof)
+
+		for _, v := range tokens {
+			fmt.Printf("%v\n", v)
+		}
 	} else {
-		fmt.Println("EOF  null") // Placeholder, remove this line when implementing the scanner
+		//fmt.Println("EOF  null") // Placeholder, remove this line when implementing the scanner
 	}
 }
