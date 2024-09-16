@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// TODO: it's better to use rune here?
 type TokenType int
 
 const (
@@ -14,6 +15,10 @@ const (
 	RIGHT_PAREN
 	LEFT_BRACE
 	RIGHT_BRACE
+	STAR
+	DOT
+	COMMA
+	PLUS
 )
 
 func (t TokenType) String() string {
@@ -29,7 +34,7 @@ func (t TokenType) String() string {
 	case RIGHT_BRACE:
 		return "RIGHT_BRACE"
 	default:
-		return "UNKNOWN"
+		panic(fmt.Sprintf("I don't know how to print %s", t))
 	}
 }
 
