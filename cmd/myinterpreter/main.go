@@ -19,6 +19,7 @@ const (
 	DOT
 	COMMA
 	PLUS
+	MINUS
 )
 
 func (t TokenType) String() string {
@@ -41,6 +42,8 @@ func (t TokenType) String() string {
 		return "COMMA"
 	case PLUS:
 		return "PLUS"
+	case MINUS:
+		return "MINUS"
 	default:
 		return "UNKOWN"
 	}
@@ -120,6 +123,8 @@ func scanning(content []byte) []Tokenize {
 			tt = COMMA
 		case "+":
 			tt = PLUS
+		case "-":
+			tt = MINUS
 		default:
 			panic(fmt.Sprintf("`%+v` not implemented yet", string(c)))
 		}
