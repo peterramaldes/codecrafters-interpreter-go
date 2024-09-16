@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// TODO: it's better to use rune here?
 type TokenType int
 
 const (
@@ -14,6 +15,10 @@ const (
 	RIGHT_PAREN
 	LEFT_BRACE
 	RIGHT_BRACE
+	STAR
+	DOT
+	COMMA
+	PLUS
 )
 
 func (t TokenType) String() string {
@@ -28,8 +33,16 @@ func (t TokenType) String() string {
 		return "LEFT_BRACE"
 	case RIGHT_BRACE:
 		return "RIGHT_BRACE"
+	case STAR:
+		return "STAR"
+	case DOT:
+		return "DOT"
+	case COMMA:
+		return "COMMA"
+	case PLUS:
+		return "PLUS"
 	default:
-		return "UNKNOWN"
+		return "UNKOWN"
 	}
 }
 
@@ -99,6 +112,16 @@ func scanning(content []byte) []Tokenize {
 			tt = LEFT_BRACE
 		case "}":
 			tt = RIGHT_BRACE
+		case "*":
+			tt = STAR
+		case ".":
+			tt = DOT
+		case ",":
+			tt = COMMA
+		case "+":
+			tt = PLUS
+		default:
+			panic(fmt.Sprintf("`%+v` not implemented yet", string(c)))
 		}
 
 		// Parse the lexeme
