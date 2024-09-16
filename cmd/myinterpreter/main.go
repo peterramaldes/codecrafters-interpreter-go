@@ -45,6 +45,8 @@ func (t TokenType) String() string {
 		return "PLUS"
 	case MINUS:
 		return "MINUS"
+	case SEMICOLON:
+		return "SEMICOLON"
 	default:
 		return "UNKOWN"
 	}
