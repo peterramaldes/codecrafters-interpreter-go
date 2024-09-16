@@ -20,6 +20,7 @@ const (
 	COMMA
 	PLUS
 	MINUS
+	SEMICOLON
 )
 
 func (t TokenType) String() string {
@@ -123,8 +124,8 @@ func scanning(content []byte) []Tokenize {
 			tt = COMMA
 		case "+":
 			tt = PLUS
-		case "-":
-			tt = MINUS
+		case ";":
+			tt = SEMICOLON
 		default:
 			panic(fmt.Sprintf("`%+v` not implemented yet", string(c)))
 		}
