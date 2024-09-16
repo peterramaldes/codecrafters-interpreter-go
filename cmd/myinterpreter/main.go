@@ -71,6 +71,11 @@ func main() {
 		for i := 0; i < len(content); i++ {
 			c := content[i]
 
+			if !c {
+				// Skip empty line
+				break
+			}
+
 			if c == '\n' {
 				// Skip breakline
 				break
