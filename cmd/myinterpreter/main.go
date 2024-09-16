@@ -124,6 +124,8 @@ func scanning(content []byte) []Tokenize {
 			tt = COMMA
 		case "+":
 			tt = PLUS
+		case "-":
+			tt = MINUS
 		case ";":
 			tt = SEMICOLON
 		default:
