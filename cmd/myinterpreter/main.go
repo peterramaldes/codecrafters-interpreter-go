@@ -65,53 +65,54 @@ func main() {
 	}
 
 	var tokens []Tokenize
-	if len(content) > 0 {
 
-		// Meaning we have data on the file to read into it
-		for i := 0; i < len(content); i++ {
-			c := content[i]
+	// Meaning we have data on the file to read into it
+	for i := 0; i < len(content); i++ {
+		c := content[i]
 
-			if c == '\n' {
-				// Skip breakline
-				break
-			}
-
-			// Parse token type
-			var tt TokenType
-			switch string(c) {
-			case "(":
-				tt = LEFT_PAREN
-			case ")":
-				tt = RIGHT_PAREN
-			}
-
-			// Parse the lexeme
-			lx := strings.TrimSpace(string(c))
-
-			// Parse literal
-			l := "null"
-
-			val := Tokenize{
-				tokenType: tt,
-				lexeme:    lx,
-				literal:   l,
-			}
-
-			tokens = append(tokens, val)
+		if c == 1 {
+			// Skip empty line
+			break
 		}
 
-		// Add `EOF null` as we finish the file
-		eof := Tokenize{
-			tokenType: EOF,
-			lexeme:    "",
-			literal:   "null",
+		if c == '\n' {
+			// Skip breakline
+			break
 		}
-		tokens = append(tokens, eof)
 
-		for _, v := range tokens {
-			fmt.Printf("%v\n", v)
+		// Parse token type
+		var tt TokenType
+		switch string(c) {
+		case "(":
+			tt = LEFT_PAREN
+		case ")":
+			tt = RIGHT_PAREN
 		}
-	} else {
-		//fmt.Println("EOF  null") // Placeholder, remove this line when implementing the scanner
+
+		// Parse the lexeme
+		lx := strings.TrimSpace(string(c))
+
+		// Parse literal
+		l := "null"
+
+		val := Tokenize{
+			tokenType: tt,
+			lexeme:    lx,
+			literal:   l,
+		}
+
+		tokens = append(tokens, val)
+	}
+
+	// Add `EOF null` as we finish the file
+	eof := Tokenize{
+		tokenType: EOF,
+		lexeme:    "",
+		literal:   "null",
+	}
+	tokens = append(tokens, eof)
+
+	for _, v := range tokens {
+		fmt.Printf("%v\n", v)
 	}
 }
