@@ -70,6 +70,7 @@ func (t Tokenize) String() string {
 
 func Scan(content []byte) []Tokenize {
 	var tokens []Tokenize
+	var line = 1
 
 	// Meaning we have data on the file to read into it
 	for i := 0; i < len(content); i++ {
@@ -77,6 +78,7 @@ func Scan(content []byte) []Tokenize {
 
 		if c == '\n' {
 			// Skip breakline
+			line++
 			break
 		}
 
@@ -104,7 +106,8 @@ func Scan(content []byte) []Tokenize {
 		case ";":
 			tt = SEMICOLON
 		default:
-			panic(fmt.Sprintf("`%+v` not implemented yet", string(c)))
+			fmt.Println(fmt.Sprintf("[line %d] Error: Unexpected character: %s", line, string(c)))
+			continue
 		}
 
 		// Parse the lexeme
